@@ -1,0 +1,41 @@
+<nav class="navbar navbar-light bg-warning mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand">Event</a>
+    <form class="d-flex" *ngIf="logForm" [formGroup]="logForm">
+      <input class="form-control me-2" type="email" placeholder="Email" formControlName="email">
+      <input class="form-control me-2" type="password" placeholder="Password" formControlName="password">
+      <button class="btn btn-secondary" type="button" (click)="login()">Login</button>
+      <button class="btn btn-light" type="button" routerLink="/register">Signup</button>
+    </form>
+  </div>
+</nav>
+
+<div class="card mt-5">
+  <div class="card-body">
+    <form *ngIf="forgetForm" [formGroup]="forgetForm" (ngSubmit)="forgetPassword()">
+      <div class="mb-3">
+        <h4 class="text-dark text-muted">Forget Password</h4>
+      </div>
+
+      <div class="form-group mb-2">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" formControlName="email" placeholder="Email"
+          [ngClass]="{'is-valid': submitted && !forgetForm.get('email')?.errors, 'is-invalid': submitted && forgetForm.get('email')?.errors}">
+        <div class="d-block invalid-feedback" *ngIf="submitted && forgetForm.get('email')?.errors?.['required']">
+          Email is required.
+        </div>
+        <div class="d-block invalid-feedback" *ngIf="submitted && forgetForm.get('email')?.errors?.['email']">
+          Email is invalid.
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Send Link</button>
+
+        <div class="row">
+          <div class="col-md-6">
+            <a routerLink="/login">Back to <span class="text-danger">login</span> </a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

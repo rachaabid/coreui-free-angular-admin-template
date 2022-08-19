@@ -1,0 +1,162 @@
+<div class="container mt-3">
+  <h1 class="text-center mb-3">List books</h1>
+  <div class="d-flex row justify-content-between mb-3">
+    <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
+      Book</button>
+
+    <input type="search" class="form-control text-start col-4" placeholder="Search by category" style="width:300px"
+      [(ngModel)]="searchBook">
+  </div>
+
+  <div style="overflow-x:auto; overflow-y:auto; max-height: 500px;">
+    <table class="table table-hover table-bordered col-sm-12">
+      <thead class="table-success">
+        <tr>
+          <th class="col-1">No</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Description</th>
+          <th scope="col">Content</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of listBooks; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{book.title | titlecase}}</td>
+          <td>{{book.author}}</td>
+          <td>{{book.description}}</td>
+          <td>{{book.content}}</td>
+
+          <td>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
+              (click)="showBookData(book._id)"><span><i class="fa fa-edit text-white"></i></span></button>
+            <button type="button" class="btn btn-danger" (click)="deleteBook(book._id)"><span><i
+                  class="fa fa-trash-alt text-white"></i></span></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal" id="ModalAdd">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Book </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <form *ngIf="bookForm" [formGroup]="bookForm" (ngSubmit)="addBook()">
+            <div class="form-group mb-2">
+              <lab el for="title">Title:</label>
+                <input type="text" class="form-control" formControlName="title" placeholder="Title"
+                  [ngClass]="{'is-invalid': submitted && bookForm.get('title')?.errors, 'is-valid': submitted && !bookForm.get('title')?.errors}">
+                <div class="d-block invalid-feedback" *ngIf="submitted && bookForm.get('title')?.errors?.['required']">
+                  Title is required
+                </div>
+            </div>
+
+            <div class="form-group mb-2">
+              <label for="author">Author:</label>
+              <input type="text" class="form-control" formControlName="author" placeholder="author"
+                [ngClass]="{'is-invalid': submitted && bookForm.get('author')?.errors, 'is-valid': submitted && !bookForm.get('author')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && bookForm.get('author')?.errors?.['required']">
+                Author is required
+              </div>
+            </div>
+
+            <div class="form-group mb-2">
+              <label for="description">Description:</label>
+              <input type="text" class="form-control" formControlName="description" placeholder="Description"
+                [ngClass]="{'is-invalid': submitted && bookForm.get('description')?.errors, 'is-valid': submitted && !bookForm.get('description')?.errors}">
+              <div class="d-block invalid-feedback"
+                *ngIf="submitted && bookForm.get('description')?.errors?.['required']">
+                Description is required
+              </div>
+            </div>
+
+            <div class="form-group mb-2">
+              <label for="content">Content:</label>
+              <input type="file" class="form-control" formControlName="content" placeholder="Content"
+                [ngClass]="{'is-invalid': submitted && bookForm.get('content')?.errors, 'is-valid': submitted && !bookForm.get('content')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && bookForm.get('content')?.errors?.['required']">
+                Content is required
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="ModalUpd">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Update Book </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="form-group mb-2">
+            <lab el for="title">Title:</label>
+              <input type="text" class="form-control" formControlName="title" placeholder="Title"
+                [ngClass]="{'is-invalid': submitted && bookForm.get('title')?.errors, 'is-valid': submitted && !bookForm.get('title')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && bookForm.get('title')?.errors?.['required']">
+                Title is required
+              </div>
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="author">Author:</label>
+            <input type="text" class="form-control" formControlName="author" placeholder="author"
+              [ngClass]="{'is-invalid': submitted && bookForm.get('author')?.errors, 'is-valid': submitted && !bookForm.get('author')?.errors}">
+            <div class="d-block invalid-feedback" *ngIf="submitted && bookForm.get('author')?.errors?.['required']">
+              Author is required
+            </div>
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" formControlName="description" placeholder="Description"
+              [ngClass]="{'is-invalid': submitted && bookForm.get('description')?.errors, 'is-valid': submitted && !bookForm.get('description')?.errors}">
+            <div class="d-block invalid-feedback"
+              *ngIf="submitted && bookForm.get('description')?.errors?.['required']">
+              Description is required
+            </div>
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="content">Content:</label>
+            <input type="file" class="form-control" formControlName="content" placeholder="Content"
+              [ngClass]="{'is-invalid': submitted && bookForm.get('content')?.errors, 'is-valid': submitted && !bookForm.get('content')?.errors}">
+            <div class="d-block invalid-feedback" *ngIf="submitted && bookForm.get('content')?.errors?.['required']">
+              Content is required
+            </div>
+          </div>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -70,6 +70,21 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
+      { path: 'book', 
+      loadChildren: () => 
+      import('./views/book/book.module').then(m => m.BookModule), 
+       
+    },
+      { path: 'category', 
+      loadChildren: () => 
+      import('./views/category/category.module').then(m => m.CategoryModule), 
+       
+     },
+  { path: 'customer', 
+  loadChildren: () => 
+  import('./views/customer/customer.module').then(m => m.CustomerModule), 
+   
+},
     ]
   },
   {
@@ -100,7 +115,13 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
-  {path: '**', redirectTo: 'dashboard'}
+  {
+    path: 'forget', component: ForgetPasswordComponent
+  },
+  {
+    path: 'resetPassword/:resetToken/:id', component: ResetPasswordComponent
+  },
+  // {path: '**', redirectTo: 'dashboard'}
 ];
 
 @NgModule({

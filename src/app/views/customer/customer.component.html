@@ -1,0 +1,121 @@
+<div class="container mt-3">
+  <h1 class="text-center mb-3">List Customers</h1>
+  <div class="d-flex row justify-content-between mb-3">
+    <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
+      Customer</button>
+
+    <input type="search" class="form-control text-start col-4" placeholder="Search by Customer" style="width:300px"
+      [(ngModel)]="searchCustomer">
+  </div>
+
+  <div style="overflow-x:auto; overflow-y:auto; max-height: 500px;">
+  <table class="table table-hover table-bordered col-sm-12">
+    <thead class="table-success">
+      <tr>
+        <th class="col-1">No</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of listCustomers; let i=index">
+        <td>{{i+1}}</td>
+        <td>{{customer.fullName | titlecase}}</td>
+        <td>{{customer.type}}</td>
+
+        <td>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
+            (click)="showCustomerData(customer._id)"><span><i class="fa fa-edit text-white"></i></span></button>
+          <button type="button" class="btn btn-danger" (click)="deleteCustomer(customer._id)"><span><i
+                class="fa fa-trash-alt text-white"></i></span></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <div class="modal" id="ModalAdd">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Customer </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <form *ngIf="customerForm" [formGroup]="customerForm" (ngSubmit)="addCustomer()">
+              <div class="form-group mb-2">
+                <label for="fullName">Full Name:</label>
+                <input type="text" class="form-control" formControlName="fullName" placeholder="Full Name"
+                  [ngClass]="{'is-invalid': submitted && customerForm.get('fullName')?.errors, 'is-valid': submitted && !customerForm.get('fullName')?.errors}">
+                <div class="d-block invalid-feedback"
+                  *ngIf="submitted && customerForm.get('fullName')?.errors?.['required']">
+                  Full Name is required
+                </div>
+              </div>
+           
+              <div class="form-group mb-2">
+                <label for="type">Type</label>
+                <select class="form-select" formControlName="type">
+                  <option value="Normal">Normal</option>
+                  <option value="Subscriber">Subscriber</option>
+                </select>
+              </div>
+  
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="ModalUpd">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Update Customer </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <form *ngIf="CustomerForm" [formGroup]="CustomerForm" (ngSubmit)="saveChanges()">
+              <div class="form-group mb-2">
+                <label for="fullName">Full Name:</label>
+                <input type="text" class="form-control" formControlName="fullName" placeholder="Full Name"
+                  [ngClass]="{'is-invalid': submitted && customerForm.get('fullName')?.errors, 'is-valid': submitted && !customerForm.get('fullName')?.errors}">
+                <div class="d-block invalid-feedback"
+                  *ngIf="submitted && customerForm.get('fullName')?.errors?.['required']">
+                  Full Name is required
+                </div>
+              </div>
+           
+              <div class="form-group mb-2">
+                <label for="type">Type</label>
+                <select class="form-select" formControlName="type">
+                  <option value="Normal">Normal</option>
+                  <option value="Subscriber">Subscriber</option>
+                </select>
+              </div>
+  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

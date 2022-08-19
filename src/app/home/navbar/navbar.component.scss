@@ -1,0 +1,16 @@
+nav{
+  height: 80px;
+  }
+  
+  .nav-link{
+    font-size:larger;
+    font-weight:bold;
+    font-style: italic;
+    color: chocolate;
+  }
+  
+  .nav-link:hover {
+    color: white !important;
+    background-color: orange;
+    text-transform:uppercase;
+  }

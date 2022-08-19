@@ -1,41 +1,54 @@
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
-  <c-container>
-    <c-row class="justify-content-center">
-      <c-col lg="7" md="9" xl="6">
-        <c-card class="mx-4">
-          <c-card-body class="p-4">
-            <form cForm>
-              <h1>Register</h1>
-              <p class="text-medium-emphasis">Create your account</p>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilUser"></svg>
-                </span>
-                <input autoComplete="name" cFormControl placeholder="Username" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>@</span>
-                <input autoComplete="email" cFormControl placeholder="Email" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" cFormControl placeholder="Password" type="password" />
-              </c-input-group>
-              <c-input-group class="mb-4">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" cFormControl placeholder="Repeat password" type="password" />
-              </c-input-group>
-              <div class="d-grid">
-                <button cButton color="success">Create Account</button>
-              </div>
-            </form>
-          </c-card-body>
-        </c-card>
-      </c-col>
-    </c-row>
-  </c-container>
+<div class="card bg-light min-vh-75 d-flex flex-row col-8 align-items-center container mt-5">
+  <h1 class="mx-5" style="font-weight: 900;">Create an account</h1>
+  <form class="row p-4" *ngIf="userForm" [formGroup]="userForm" (ngSubmit)="register()">
+    <div class="form-group mb-2">
+      <label for="userName">First Name:</label>
+      <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"
+        [ngClass]="{'is-invalid': submitted && userForm.get('firstName')?.errors, 'is-valid': submitted && !userForm.get('firstName')?.errors}">
+      <div class="d-block invalid-feedback" *ngIf="submitted && userForm.get('firstName')?.errors?.['required']">
+        First Name is required
+      </div>
+    </div>
+
+    <div class="form-group mb-2">
+      <label for="userName">Last Name:</label>
+      <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
+        [ngClass]="{'is-invalid': submitted && userForm.get('lastName')?.errors, 'is-valid': submitted && !userForm.get('lastName')?.errors}">
+      <div class="d-block invalid-feedback" *ngIf="submitted && userForm.get('lastName')?.errors?.['required']">
+        Last Name is required
+      </div>
+    </div>
+
+    <div class="form-group mb-2">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" formControlName="email" placeholder="Email"
+        [ngClass]="{'is-invalid': submitted && userForm.get('email')?.errors, 'is-valid': submitted && !userForm.get('email')?.errors}">
+      <div class="d-block invalid-feedback" *ngIf="submitted && userForm.get('email')?.errors?.['required']">
+        Email is required
+      </div>
+      <div class="d-block invalid-feedback" *ngIf="submitted && userForm.get('email')?.errors?.['email']">
+        Email is invalid
+      </div> 
+    </div>
+
+    <div class="form-group mb-2">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" formControlName="password" placeholder="Password"
+         [ngClass]="{'is-invalid': submitted && userForm.get('password')?.errors, 'is-valid': submitted && !userForm.get('password')?.errors}">
+      <div class="d-block invalid-feedback" *ngIf="submitted && userForm.get('password')?.errors?.['required']">
+        Password is required
+      </div> 
+    </div>
+
+    <div class="form-group mb-2">
+      <label for="role">Role:</label>
+      <input type="text" class="form-control" formControlName="role" placeholder="Role"
+        [ngClass]="{'is-invalid': submitted && userForm.get('role')?.errors, 'is-valid': submitted && !userForm.get('role')?.errors}">
+      <div class="d-block invalid-feedback" *ngIf="submitted && userForm.get('role')?.errors?.['required']">
+        Role is required
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Register</button>
+  </form>
 </div>
