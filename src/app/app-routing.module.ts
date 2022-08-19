@@ -6,6 +6,8 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { ForgetPasswordComponent } from './views/pages/resertForget/forget/forget.component';
+import { ResetPasswordComponent } from './views/pages/resertForget/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -72,17 +74,17 @@ const routes: Routes = [
       },
       { path: 'book', 
       loadChildren: () => 
-      import('./views/book/book.module').then(m => m.BookModule), 
+      import('./views/book/book/book.module').then(m => m.BookModule), 
        
     },
       { path: 'category', 
       loadChildren: () => 
-      import('./views/category/category.module').then(m => m.CategoryModule), 
+      import('./views/category/category/category.module').then(m => m.CategoryModule), 
        
      },
   { path: 'customer', 
   loadChildren: () => 
-  import('./views/customer/customer.module').then(m => m.CustomerModule), 
+  import('./views/customer/customer/customer.module').then(m => m.CustomerModule), 
    
 },
     ]
