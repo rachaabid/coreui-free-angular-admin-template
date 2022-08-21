@@ -10,6 +10,8 @@ import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angula
 import { IconModule } from '@coreui/icons-angular';
 import { ResetPasswordComponent } from './resertForget/reset-password/reset-password.component';
 import { ForgetComponent } from './resertForget/forget/forget.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginCustomerComponent } from './loginCustomer/login-customer/login-customer.component';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { ForgetComponent } from './resertForget/forget/forget.component';
     Page404Component,
     Page500Component,
     ResetPasswordComponent,
-    ForgetComponent
+    ForgetComponent,
+    LoginCustomerComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,9 @@ import { ForgetComponent } from './resertForget/forget/forget.component';
     ButtonModule,
     GridModule,
     IconModule,
-    FormModule
+    FormModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule {

@@ -11,4 +11,9 @@ export class LoginService {
   signIn(data: any){
     return this.http.post(`${this.baseURL}login`, data);
   }
+
+  logOut(){
+    localStorage.removeItem('token');
+    return this.http.get(`${this.baseURL}logout`);
+  }
 }

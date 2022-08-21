@@ -41,9 +41,11 @@
     </div>
 
     <div class="form-group mb-2">
-      <label for="role">Role:</label>
-      <input type="text" class="form-control" formControlName="role" placeholder="Role"
-        [ngClass]="{'is-invalid': submitted && userForm.get('role')?.errors, 'is-valid': submitted && !userForm.get('role')?.errors}">
+      <label for="role">Role</label>
+      <select class="form-select" formControlName="role">
+        <option value="Admin">Admin</option>
+        <option value="Customer">Customer</option>
+      </select>
       <div class="d-block invalid-feedback" *ngIf="submitted && userForm.get('role')?.errors?.['required']">
         Role is required
       </div>

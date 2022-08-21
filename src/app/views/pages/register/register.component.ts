@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import {RegisterService} from '../services/registre.service';
+import {RegistreService} from '../register/registre.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +12,7 @@ import {RegisterService} from '../services/registre.service';
 export class RegisterComponent implements OnInit {
   userForm?: FormGroup;
   submitted = false;
-  constructor(private registerService: RegisterService,
+  constructor(private registerService: RegistreService,
               private route: Router,
               private toastr: ToastrService) { }
   ngOnInit(): void {
@@ -30,12 +30,21 @@ this.submitted =true;
 if (this.userForm?.invalid){
   return
 }
-this.registerService.signup(this.userForm?.value).subscribe(response=>{
-this.toastr.success('user created', 'Hello')
-}, error=>{
+this.registerService.signup(this.userForm?.value).subscribe((response: any)=>{
+
+  if (this.userForm?.value['role'] === 'Admin'){
+    this.toastr.success('Admin created', 'Hello')
+    this.route.navigate(['/login']);
+  }
+
+if (this.userForm?.value['role'] === 'Customer'){
+    this.toastr.success('Customer created', 'Hello')
+    this.route.navigate(['/loginCustomer']);
+  }
+
+}, (error: any)=>{
   console.log(error);
 });
-this.route.navigate(['/login']);
 }
 }
 

@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { LoginService } from '../../login/services/login.service';
-import {ForgetPasswordService} from '../services/forget-password.service';
+import { LoginService } from '../../login/login.service';
+import {ForgetService} from '../services/forget.service';
 
 @Component({
-  selector: 'app-forget-password',
-  templateUrl: './forget-password.component.html',
-  styleUrls: ['./forget-password.component.scss']
+  selector: 'app-forget',
+  templateUrl: './forget.component.html',
+  styleUrls: ['./forget.component.scss']
 })
-export class ForgetPasswordComponent implements OnInit {
+export class ForgetComponent implements OnInit {
 email: any = '';
 forgetForm?: FormGroup;
 logForm?: FormGroup;
 submitted = false;
-  constructor(private forgetService: ForgetPasswordService, private route: Router, private loginService: LoginService, private toastr: ToastrService) { }
+  constructor(private forgetService: ForgetService, private route: Router, private loginService: LoginService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.logForm =new FormGroup ({
@@ -28,9 +28,9 @@ submitted = false;
   }
 
   forgetPassword(){
-    this.forgetService.forget(this.forgetForm?.value).subscribe(response=>{
+    this.forgetService.forget(this.forgetForm?.value).subscribe((response: any)=>{
       this.toastr.info('Email sent', 'Hello');
-    }, error=>{
+    }, (error: any)=>{
     console.log(error)
     });
   }
@@ -40,10 +40,10 @@ submitted = false;
     if (this.forgetForm?.invalid){
       return
     }
-    this.loginService.signIn(this.logForm?.value).subscribe(response=>{
+    this.loginService.signIn(this.logForm?.value).subscribe((response: any)=>{
       this.toastr.success('Welcome to dashboard', 'Hello')
       this.route.navigate(['/dashboard']);
-    }, error=>{
+    }, (error: any)=>{
       console.log(error)
     })
   }

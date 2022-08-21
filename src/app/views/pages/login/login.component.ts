@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   logForm?: FormGroup;
@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
     this.loginService.signIn(this.logForm?.value).subscribe((response: any)=>{ 
       localStorage.setItem('token', response.token)
       this.toastr.success('Welcome to dashboard', 'Hello')
-      this.route.navigate(['/home']);
-    }, error=>{
+      this.route.navigate(['/dashboard']);
+    }, (error: any)=>{
       console.log(error)
     })
   }

@@ -1,0 +1,116 @@
+<p>categories works!</p>
+<div class="container mt-3">
+  <h1 class="text-center mb-3">List Categories</h1>
+  <div class="d-flex row justify-content-between mb-3">
+    <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
+      Category</button>
+
+    <input type="search" class="form-control text-start col-4" placeholder="Search by category" style="width:300px"
+      [(ngModel)]="searchCategory">
+  </div>
+
+  <div style="overflow-x:auto; overflow-y:auto; max-height: 500px;">
+  <table class="table table-hover table-bordered col-sm-6">
+    <thead class="table-success">
+      <tr>
+        <th class="col-1">No</th>
+        <th scope="col">Category Name</th>
+        <th scope="col" id="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of listCategories | filterCategory: searchCategory; let i=index">
+        <td>{{i+1}}</td>
+        <td>{{category.nameCategory | titlecase}}</td>
+
+        <td>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
+            (click)="showCategoryData(category._id)"><span><i class="fa fa-edit text-white"></i></span></button>
+          <button type="button" class="btn btn-danger" (click)="deleteCategory(category._id)"><span><i
+                class="fa fa-trash-alt text-white"></i></span></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <div class="modal" id="ModalAdd">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Category </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <form *ngIf="categoryForm" [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+              <div class="form-group mb-2">
+                <label for="CategoryName">Category Name:</label>
+                <input type="text" class="form-control" formControlName="nameCategory" placeholder="Category Name"
+                  [ngClass]="{'is-invalid': submitted && categoryForm.get('nameCategory')?.errors, 'is-valid': submitted && !categoryForm.get('nameCategory')?.errors}">
+                <div class="d-block invalid-feedback"
+                  *ngIf="submitted && categoryForm.get('nameCategory')?.errors?.['required']">
+                  Category Name is required
+                </div>
+              </div>
+           
+            <fieldset class="form-group">
+              <ng-select class="bootstrap" placeholder="Choose book for your category" [options]="listBooks"
+                formControlName="books" [multiple]="true">
+              </ng-select>
+            </fieldset>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="ModalUpd">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Update Category </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <form *ngIf="categoryForm" [formGroup]="categoryForm" (ngSubmit)="saveChanges()">
+            <div class="form-group mb-2">
+              <label for="CategoryName">Category Name:</label>
+              <input type="text" class="form-control" formControlName="nameCategory" placeholder="Category Name"
+                [ngClass]="{'is-invalid': submitted && categoryForm.get('nameCategory')?.errors, 'is-valid': submitted && !categoryForm.get('nameCategory')?.errors}">
+              <div class="d-block invalid-feedback"
+                *ngIf="submitted && categoryForm.get('nameCategory')?.errors?.['required']">
+                Category Name is required
+              </div>
+            </div>
+
+            
+            <fieldset class="form-group">
+              <ng-select class="bootstrap" placeholder="Choose Tag for your Category" [options]="listBooks"
+                formControlName="books" [multiple]="true">
+              </ng-select>
+            </fieldset>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

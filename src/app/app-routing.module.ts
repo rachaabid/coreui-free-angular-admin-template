@@ -6,8 +6,10 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
-import { ForgetPasswordComponent } from './views/pages/resertForget/forget/forget.component';
+import { ForgetComponent } from './views/pages/resertForget/forget/forget.component';
 import { ResetPasswordComponent } from './views/pages/resertForget/reset-password/reset-password.component';
+import { AuthGuard} from './auth.guard'
+import { LoginCustomerComponent } from './views/pages/loginCustomer/login-customer/login-customer.component';
 
 const routes: Routes = [
   {
@@ -17,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: DefaultLayoutComponent,
+    component: DefaultLayoutComponent, canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },
@@ -72,21 +74,18 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
-      { path: 'book', 
-      loadChildren: () => 
-      import('./views/book/book/book.module').then(m => m.BookModule), 
-       
+      { 
+        path: 'customers', 
+        loadChildren: () => import('./views/customers/customers.module').then(m => m.CustomersModule) 
+      },
+  { 
+    path: 'categories', 
+    loadChildren: () => import('./views/categories/categories.module').then(m => m.CategoriesModule)
+   },
+  {
+     path: 'books', 
+     loadChildren: () => import('./views/books/books.module').then(m => m.BooksModule) 
     },
-      { path: 'category', 
-      loadChildren: () => 
-      import('./views/category/category/category.module').then(m => m.CategoryModule), 
-       
-     },
-  { path: 'customer', 
-  loadChildren: () => 
-  import('./views/customer/customer/customer.module').then(m => m.CustomerModule), 
-   
-},
     ]
   },
   {
@@ -111,6 +110,13 @@ const routes: Routes = [
     }
   },
   {
+    path: 'loginCustomer',
+    component: LoginCustomerComponent,
+    data: {
+      title: 'LoginCustomer Page'
+    }
+  },
+  {
     path: 'register',
     component: RegisterComponent,
     data: {
@@ -118,11 +124,13 @@ const routes: Routes = [
     }
   },
   {
-    path: 'forget', component: ForgetPasswordComponent
+    path: 'forget', component: ForgetComponent
   },
   {
     path: 'resetPassword/:resetToken/:id', component: ResetPasswordComponent
   },
+  { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
+ 
   // {path: '**', redirectTo: 'dashboard'}
 ];
 

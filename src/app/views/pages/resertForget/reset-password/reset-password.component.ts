@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import {ResetPasswordService} from '../services/reset-password.service';
+import {ResetPasswordService} from '../services/reset.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -27,9 +27,9 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetForm?.invalid){
       return
     }
-    this.resetService.reset(this.token, this.resetForm?.value).subscribe(response=>{
+    this.resetService.reset(this.token, this.resetForm?.value).subscribe((response: any)=>{
       this.toastr.info('Your password has been reset', 'Reset password')
-    }, error=>{
+    }, (error: any)=>{
      console.log(error);
     });
   }

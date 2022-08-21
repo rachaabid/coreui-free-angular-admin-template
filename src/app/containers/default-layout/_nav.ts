@@ -15,22 +15,18 @@ export const navItems: INavData[] = [
     name: 'Theme'
   },
   {
-    title: true,
-    name: 'Theme'
-  },
-  {
-    name: 'Book',
-    url: '/book',
+    name: 'Books',
+    url: '/books',
     iconComponent: { name: '' }
   },
   {
-    name: 'Customer',
-    url: '/customer',
+    name: 'Customers',
+    url: '/customers',
     iconComponent: { name: '' }
   },
   {
-    name: 'Category',
-    url: '/category',
+    name: 'Categories',
+    url: '/categories',
     iconComponent: { name: '' }
   },
 //   {
