@@ -18,7 +18,7 @@ submitted = false;
     this.logCustomerForm = new FormGroup ({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
-      type: new FormControl('')
+      type: new FormControl('', Validators.required)
   })
   }
 

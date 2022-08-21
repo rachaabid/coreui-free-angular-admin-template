@@ -19,7 +19,8 @@ export class CustomersComponent implements OnInit {
   ngOnInit(): void {
     this.loadCustomers();
     this.customerForm = new FormGroup({
-      fullName: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
       type: new FormControl(''),
     })
   }

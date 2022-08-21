@@ -14,7 +14,8 @@
     <thead class="table-success">
       <tr>
         <th class="col-1">No</th>
-        <th scope="col">Full Name</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
         <th scope="col">Type</th>
         <th scope="col" id="actions">Actions</th>
       </tr>
@@ -22,7 +23,8 @@
     <tbody>
       <tr *ngFor="let customer of listCustomers | filterCustomer: searchCustomer; let i=index">
         <td>{{i+1}}</td>
-        <td>{{customer.fullName | titlecase}}</td>
+        <td>{{customer.firstName | titlecase}}</td>
+        <td>{{customer.lastName | titlecase}}</td>
         <td>{{customer.type}}</td>
 
         <td>
@@ -47,12 +49,22 @@
 
           <form *ngIf="customerForm" [formGroup]="customerForm" (ngSubmit)="addCustomer()">
               <div class="form-group mb-2">
-                <label for="fullName">Full Name:</label>
-                <input type="text" class="form-control" formControlName="fullName" placeholder="Full Name"
-                  [ngClass]="{'is-invalid': submitted && customerForm.get('fullName')?.errors, 'is-valid': submitted && !customerForm.get('fullName')?.errors}">
+                <label for="firstName">First Name:</label>
+                <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"
+                  [ngClass]="{'is-invalid': submitted && customerForm.get('firstName')?.errors, 'is-valid': submitted && !customerForm.get('firstName')?.errors}">
                 <div class="d-block invalid-feedback"
-                  *ngIf="submitted && customerForm.get('fullName')?.errors?.['required']">
-                  Full Name is required
+                  *ngIf="submitted && customerForm.get('firstName')?.errors?.['required']">
+                  First Name is required
+                </div>
+              </div>
+
+              <div class="form-group mb-2">
+                <label for="lastName">Last Name:</label>
+                <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
+                  [ngClass]="{'is-invalid': submitted && customerForm.get('lastName')?.errors, 'is-valid': submitted && !customerForm.get('lastName')?.errors}">
+                <div class="d-block invalid-feedback"
+                  *ngIf="submitted && customerForm.get('lastName')?.errors?.['required']">
+                  Last Name is required
                 </div>
               </div>
            
@@ -62,6 +74,10 @@
                   <option value="Normal">Normal</option>
                   <option value="Subscriber">Subscriber</option>
                 </select>
+                <div class="d-block invalid-feedback"
+                  *ngIf="submitted && customerForm.get('type')?.errors?.['required']">
+                  Type is required
+                </div>
               </div>
   
 
@@ -89,13 +105,23 @@
         <div class="modal-body">
 
           <form *ngIf="customerForm" [formGroup]="customerForm" (ngSubmit)="saveChanges()">
+            <div class="form-group mb-2">
+              <label for="firstName">First Name:</label>
+              <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"
+                [ngClass]="{'is-invalid': submitted && customerForm.get('firstName')?.errors, 'is-valid': submitted && !customerForm.get('firstName')?.errors}">
+              <div class="d-block invalid-feedback"
+                *ngIf="submitted && customerForm.get('firstName')?.errors?.['required']">
+                First Name is required
+              </div>
+            </div>
+
               <div class="form-group mb-2">
-                <label for="fullName">Full Name:</label>
-                <input type="text" class="form-control" formControlName="fullName" placeholder="Full Name"
-                  [ngClass]="{'is-invalid': submitted && customerForm.get('fullName')?.errors, 'is-valid': submitted && !customerForm.get('fullName')?.errors}">
+                <label for="lastName">Last Name:</label>
+                <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"
+                  [ngClass]="{'is-invalid': submitted && customerForm.get('lastName')?.errors, 'is-valid': submitted && !customerForm.get('lastName')?.errors}">
                 <div class="d-block invalid-feedback"
-                  *ngIf="submitted && customerForm.get('fullName')?.errors?.['required']">
-                  Full Name is required
+                  *ngIf="submitted && customerForm.get('lastName')?.errors?.['required']">
+                  Last Name is required
                 </div>
               </div>
            
@@ -105,6 +131,10 @@
                   <option value="Normal">Normal</option>
                   <option value="Subscriber">Subscriber</option>
                 </select>
+                <div class="d-block invalid-feedback"
+                  *ngIf="submitted && customerForm.get('type')?.errors?.['required']">
+                  Type is required
+                </div>
               </div>
   
             <div class="modal-footer">
