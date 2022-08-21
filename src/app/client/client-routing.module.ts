@@ -9,14 +9,14 @@ import { WelcomeComponent } from './welcome/welcome.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'welcome',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
     path: '', component: ClientComponent,
     children: [
       {
-        path:'welcome', component: WelcomeComponent
+        path:'home', component: WelcomeComponent
       },
       {
         path:'books', component: ListBooksComponent

@@ -30,7 +30,7 @@ submitted = false;
     this.loginService.signIn(this.logCustomerForm?.value).subscribe((response: any)=>{ 
       localStorage.setItem('token', response.token)
       this.toastr.success('Welcome to library', 'Hello')
-      this.route.navigate(['/welcome']);
+      this.route.navigate(['/home/home']);
     }, (error: any)=>{
       console.log(error)
     })
