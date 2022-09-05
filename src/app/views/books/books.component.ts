@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookService } from '../books/services/book.service';
 import { ToastrService } from 'ngx-toastr';
+import { IOption } from 'ng-select';
 
 @Component({
   selector: 'app-Books',
@@ -13,18 +14,26 @@ export class BooksComponent implements OnInit {
   bookForm?: FormGroup;
   submitted = false;
   id: any;
+  listCategories: Array<IOption> = [];
+
   searchBook: string = '';
   fileSelected: any;
   constructor(private bookService: BookService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.loadCategories();
     this.loadBooks();
     this.bookForm = new FormGroup({
       title: new FormControl('', Validators.required),
       author: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
+      categories: new FormControl(''),
       content: new FormControl('')
     })
+  }
+
+  loadCategories() {
+    this.bookService.getCategories().subscribe((data: any) => { this.listCategories = data })
   }
 
   loadBooks() {
@@ -92,4 +101,8 @@ export class BooksComponent implements OnInit {
   }
 
 }
+
+changeCategory(e: any){
+  this.bookForm?.get('categories')?.setValue(e.target.value, {onlySelf: true})
+  }
 }

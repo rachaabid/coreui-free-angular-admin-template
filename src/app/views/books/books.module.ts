@@ -5,7 +5,7 @@ import { BooksRoutingModule } from './books-routing.module';
 import { BooksComponent } from './books.component';
 import { BookFilterPipe } from './pipes/book-filter.pipe'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { SelectModule } from 'ng-select';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     BooksRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SelectModule
   ]
 })
 export class BooksModule { }

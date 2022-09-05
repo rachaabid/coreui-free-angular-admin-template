@@ -5,7 +5,7 @@ import { CategoriesRoutingModule } from './categories-routing.module';
 import { CategoriesComponent } from './categories.component';
 import { FilterCategoryPipe } from '../categories/pipes/filter-category.pipe'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SelectModule } from 'ng-select';
+
 
 
 @NgModule({
@@ -17,8 +17,7 @@ import { SelectModule } from 'ng-select';
     CommonModule,
     CategoriesRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    SelectModule
+    ReactiveFormsModule
   ]
 })
 export class CategoriesModule { }

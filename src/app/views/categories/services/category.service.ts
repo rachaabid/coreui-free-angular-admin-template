@@ -16,10 +16,6 @@ export class CategoryService {
     return this.http.get(`${this.baseURL}Categories`);
   }
 
-  getBooks() {
-   return this.http.get(`${this.baseURL}listBooks`)
-  }
-
  getCategoryById(idCategory: any){
   return this.http.get(`${this.baseURL}Categories/${idCategory}`);
  }

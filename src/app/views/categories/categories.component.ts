@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from './services/category.service';
-import { IOption } from 'ng-select';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -14,25 +13,18 @@ export class CategoriesComponent implements OnInit {
   categoryForm?: FormGroup;
   submitted = false;
   id: any;
-  listBooks: Array<IOption> = []
   searchCategory: string = '';
   constructor(private categoryService: CategoryService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadCategories();
-    this.loadBooks();
     this.categoryForm = new FormGroup({
       nameCategory: new FormControl('', Validators.required),
-      books: new FormControl(''),
     })
   }
 
   loadCategories() {
     this.categoryService.getCategories().subscribe(data => this.listCategories = data);
-  }
-
-  loadBooks() {
-    this.categoryService.getBooks().subscribe((data: any) => { this.listBooks = data })
   }
 
   addCategory() {
@@ -73,10 +65,6 @@ export class CategoriesComponent implements OnInit {
     this.toastr.info('Data deleted', 'Category')}, 
     )
   }
-
- changeBook(e: any){
- this.categoryForm?.get('books')?.setValue(e.target.value, {onlySelf: true})
- }
 
 }
 

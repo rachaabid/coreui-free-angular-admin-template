@@ -12,6 +12,11 @@ export class BookService {
     return this.http.post(`${this.baseURL}Books`, book);
   }
 
+  getCategories() {
+    return this.http.get(`${this.baseURL}listCategories`)
+   }
+ 
+
   getBooks(){
     return this.http.get(`${this.baseURL}Books`);
   }
