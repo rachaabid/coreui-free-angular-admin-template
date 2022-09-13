@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookService } from '../books/services/book.service';
 import { ToastrService } from 'ngx-toastr';
 import { IOption } from 'ng-select';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-Books',
@@ -21,28 +22,35 @@ export class BooksComponent implements OnInit {
   constructor(private bookService: BookService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.loadCategories();
     this.loadBooks();
+    this.loadCategories();
     this.bookForm = new FormGroup({
       title: new FormControl('', Validators.required),
       author: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       categories: new FormControl(''),
+      photo: new FormControl(''),
       content: new FormControl('')
     })
+  }
+  loadBooks() {
+    this.bookService.getBooks().subscribe((data: any) => this.listBooks = data);
   }
 
   loadCategories() {
     this.bookService.getCategories().subscribe((data: any) => { this.listCategories = data })
   }
 
-  loadBooks() {
-    this.bookService.getBooks().subscribe((data: any) => this.listBooks = data);
+  selectImage(event: any) {
+    this.fileSelected = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.fileSelected);
+    reader.onloadend = () => {
+      const base64String = (<string>reader.result).replace("data:", "").replace(/^.+,/, "");
+      this.bookForm?.controls['photo'].setValue("data:image/jpeg;base64," + base64String.toString())
+    }
   }
 
-  selectFilePdf(event: any) {
-    this.fileSelected = event.target.files[0];
-  }
 
   addBook() {
     this.submitted = true;
@@ -55,10 +63,10 @@ export class BooksComponent implements OnInit {
       formData.append(fieldName, bookForm[fieldName]);
     });
     if (this.fileSelected) {
-      formData.append('content', this.fileSelected, this.fileSelected.name)
+      formData.append('photo', this.fileSelected, this.fileSelected.name)
       this.bookService.createBook(formData).subscribe((data: any) => {
-        location.reload();
         this.toastr.success('Book created', 'Good')
+        location.reload();
       },
         (error: any) => {
           console.log(error)
@@ -66,10 +74,12 @@ export class BooksComponent implements OnInit {
     }
   }
 
-  deleteBook(i: any){
-    this.bookService.removeBook(i).subscribe(data=>{
+  deleteBook(id: any){
+    this.bookService.removeBook(id).subscribe(data=>{
       this.ngOnInit();
-      this.toastr.info('Data deleted', 'Book')
+      this.toastr.info('Book deleted', 'Book'),
+      (error: any)=>{console.log(error)};
+      
     })
   }
    
@@ -93,7 +103,7 @@ export class BooksComponent implements OnInit {
       formData.append(fieldName, bookForm[fieldName]);
     });
     if (this.fileSelected) {
-      formData.append('content', this.fileSelected, this.fileSelected.name)
+      formData.append('photo', this.fileSelected, this.fileSelected.name)
     this.bookService.saveUpdate(this.id, formData).subscribe((data: any) => location.reload(),
       (error: any) => {
         console.log(error)
@@ -105,4 +115,14 @@ export class BooksComponent implements OnInit {
 changeCategory(e: any){
   this.bookForm?.get('categories')?.setValue(e.target.value, {onlySelf: true})
   }
+
+  download() {
+		this.bookService.downloadFile().subscribe((response: any) => {
+			 let blob:any = new Blob([response], { type: 'text/json; charset=utf-8' });
+			const url = window.URL.createObjectURL(response);
+		
+			saveAs(url);
+			}), (error: any) => console.log('Error downloading the file'),
+			() => console.info('File downloaded successfully');
+	}
 }

@@ -1,16 +1,19 @@
 <div class="container mt-5">
   <div class="card mb-3 col-sm-10">
     <div class="row">
-      
+      <div class="col-md-4">
+        <img [src]="book.content" alt="book" class="img-fluid rounded-start" />
+      </div>
       <div class="col-sm-8">
         <div class="card-body">
           <h3 class="card-title">{{book.title | titlecase}}</h3>
           <p class="card-text">{{book.author | titlecase}}</p>
-          <p class="card-text">{{book.description}}
+          <p class="card-text">
+            {{book.description | slice:0:100}}
+            <span *ngIf="book.description.length > 100">...</span>
           </p>
 
-          <p class="card-text">{{book.content}}
-          </p>
+          <button type="button" class="btn btn-primary">Download</button>
          
 
         </div>

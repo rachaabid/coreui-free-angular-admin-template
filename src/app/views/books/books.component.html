@@ -17,7 +17,7 @@
           <th scope="col">Title</th>
           <th scope="col">Author</th>
           <th scope="col">Description</th>
-          <th scope="col">Category</th>
+          <th scope="col">Photo</th>
           <th scope="col">Content</th>
           <th class="col-2" id="actions">Actions</th>
         </tr>
@@ -28,14 +28,15 @@
           <td>{{book.title | titlecase}}</td>
           <td>{{book.author}}</td>
           <td>{{book.description}}</td>
-          <td>{{book.categories}}</td>
+          <td>{{book.photo}}</td>
           <td>
-            {{book.content}} <a href="" download>Download</a>
+            {{book.content}} <a href="#" (click)="download()">Download</a>
           </td>
 
           <td>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
               (click)="showBookData(book._id)"><span><i class="fa fa-edit text-white"></i></span></button>
+              
             <button type="button" class="btn btn-danger" (click)="deleteBook(book._id)"><span><i
                   class="fa fa-trash-alt text-white"></i></span></button>
           </td>
@@ -88,9 +89,15 @@
               </ng-select>
             </fieldset> 
 
+            <div class="form-group">
+              <label for="photo">Photo:</label>
+              <input type="file" (change)="selectImage($event)" accept="image/*">
+              <img [src]= "bookForm.value.photo" alt="book" style="height: 50px; width:50px"> 
+            </div>
+
             <div class="form-group mb-2">
               <label for="content">Content:</label>
-              <input type="file" (change)="selectFilePdf($event)" accept=".pdf, .doc, .docs" placeholder="Content">
+              <input type="file" accept=".pdf, .doc, .docs">
             </div>
 
             <div class="modal-footer">
@@ -151,9 +158,17 @@
               </ng-select>
             </fieldset> 
 
+            <div class="form-group">
+              <label for="photo">Photo:</label>
+              <input type="file" (change)="selectImage($event)" accept="image/*">
+              <img [src]="bookForm.value.photo" alt="book" style="height: 50px; width:50px"> 
+            </div>
+
+
             <div class="form-group mb-2">
               <label for="content">Content:</label>
-              <input type="file" placeholder="Content">  
+              <input type="file" accept=
+              ".pdf, .doc, .docs">  
             </div>
 
 

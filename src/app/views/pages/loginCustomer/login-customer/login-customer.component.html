@@ -22,17 +22,6 @@
       </div> 
     </div>
 
-    <div class="form-group mb-2">
-      <label for="type">Type</label>
-      <select class="form-select" formControlName="type">
-        <option value="Normal">Normal</option>
-        <option value="Subscriber">Subscriber</option>
-      </select>
-      <div class="d-block invalid-feedback" *ngIf="submitted && logCustomerForm.get('type')?.errors?.['required']">
-        Type is required
-      </div>
-    </div>
-
     <button type="submit" class="mb-3 mt-3 btn btn-success">LoginCustomer</button><br>
     <a routerLink="/forget">Forget Password ?</a><br><br>
     <hr>

@@ -51,6 +51,18 @@
       </div>
     </div>
 
+    <div *ngIf="userForm.controls['role'].value == 'Customer'" class="form-group mb-2" >
+      <label for="type">Type</label>
+      <select class="form-select" formControlName="type">
+        <option value="Normal">Normal</option>
+        <option value="Subscriber">Subscriber</option>
+      </select>
+      <div class="d-block invalid-feedback" *ngIf="submitted && userForm.get('type')?.errors?.['required']">
+        Type is required
+      </div>
+    </div>
+
+
     <button type="submit" class="btn btn-primary mt-2">Register</button>
   </form>
 </div>

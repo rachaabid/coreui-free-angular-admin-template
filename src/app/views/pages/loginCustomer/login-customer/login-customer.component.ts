@@ -18,7 +18,7 @@ submitted = false;
     this.logCustomerForm = new FormGroup ({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required)
+      
   })
   }
 
@@ -30,7 +30,7 @@ submitted = false;
     this.loginService.signIn(this.logCustomerForm?.value).subscribe((response: any)=>{ 
       localStorage.setItem('token', response.token)
       this.toastr.success('Welcome to library', 'Hello')
-      this.route.navigate(['/home/home']);
+      this.route.navigate(['/client/home']);
     }, (error: any)=>{
       console.log(error)
     })

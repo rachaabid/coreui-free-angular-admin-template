@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {RegistreService} from '../register/registre.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-register',
@@ -21,8 +22,10 @@ export class RegisterComponent implements OnInit {
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
-      role: new FormControl('', Validators.required)
+      role: new FormControl('', Validators.required),
+      type: new FormControl('')
   })
+
 }
 
 register(){

@@ -8,6 +8,10 @@ export class BookService {
   baseURL='http://localhost:3000/api/v1/';
   constructor(private http: HttpClient) { }
 
+  downloadFile(): any {
+		return this.http.get(`${this.baseURL}Books`, {responseType: 'blob'});
+  }
+
   createBook(book: any){
     return this.http.post(`${this.baseURL}Books`, book);
   }
@@ -33,3 +37,4 @@ export class BookService {
     return this.http.put(`${this.baseURL}Books/${idBook}`, data);
    }
 }
+

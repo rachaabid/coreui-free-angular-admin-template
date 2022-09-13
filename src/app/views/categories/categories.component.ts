@@ -55,9 +55,11 @@ export class CategoriesComponent implements OnInit {
        return
      }
     
-     this.categoryService.saveUpdate(this.id, this.categoryForm?.value).subscribe(data=>location.reload(),
-     (error)=>{
-      console.log(error)})
+     this.categoryService.saveUpdate(this.id, this.categoryForm?.value).subscribe(data=> {location.reload(),
+     this.toastr.info('Your data changed', 'Good'),
+
+     (error: any)=>{
+      console.log(error)}})
    }
 
    deleteCategory(i: any){
