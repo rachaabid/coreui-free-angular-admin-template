@@ -19,6 +19,7 @@ export class BooksComponent implements OnInit {
 
   searchBook: string = '';
   fileSelected: any;
+  filePdf: any;
   constructor(private bookService: BookService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -51,6 +52,9 @@ export class BooksComponent implements OnInit {
     }
   }
 
+changeFile(e: any){
+  this.filePdf = e.target.files[0];
+}
 
   addBook() {
     this.submitted = true;
@@ -62,8 +66,8 @@ export class BooksComponent implements OnInit {
     Object.keys(bookForm).forEach(fieldName => {
       formData.append(fieldName, bookForm[fieldName]);
     });
-    if (this.fileSelected) {
-      formData.append('photo', this.fileSelected, this.fileSelected.name)
+    if (this.filePdf) {
+      formData.append('content', this.filePdf, this.filePdf.name)
       this.bookService.createBook(formData).subscribe((data: any) => {
         this.toastr.success('Book created', 'Good')
         location.reload();
@@ -102,8 +106,8 @@ export class BooksComponent implements OnInit {
     Object.keys(bookForm).forEach(fieldName => {
       formData.append(fieldName, bookForm[fieldName]);
     });
-    if (this.fileSelected) {
-      formData.append('photo', this.fileSelected, this.fileSelected.name)
+    if (this.filePdf) {
+      formData.append('content', this.filePdf, this.filePdf.name)
     this.bookService.saveUpdate(this.id, formData).subscribe((data: any) => location.reload(),
       (error: any) => {
         console.log(error)
@@ -116,13 +120,10 @@ changeCategory(e: any){
   this.bookForm?.get('categories')?.setValue(e.target.value, {onlySelf: true})
   }
 
-  download() {
-		this.bookService.downloadFile().subscribe((response: any) => {
-			 let blob:any = new Blob([response], { type: 'text/json; charset=utf-8' });
-			const url = window.URL.createObjectURL(response);
-		
-			saveAs(url);
-			}), (error: any) => console.log('Error downloading the file'),
-			() => console.info('File downloaded successfully');
-	}
+  // download() {
+	// 	this.bookService.downloadFile().subscribe(
+  //     (data: any)=> console.log(data),
+  //     (error: any)=> console.log(error)
+  //   );
+	// }
 }

@@ -30,7 +30,9 @@
           <td>{{book.description}}</td>
           <td>{{book.photo}}</td>
           <td>
-            {{book.content}} <a href="#" (click)="download()">Download</a>
+            {{book.content}} <a href="link" 
+            download="book.pdf"
+            >Download</a>
           </td>
 
           <td>
@@ -97,7 +99,7 @@
 
             <div class="form-group mb-2">
               <label for="content">Content:</label>
-              <input type="file" accept=".pdf, .doc, .docs">
+              <input type="file" (change)="changeFile($event)" name="content" accept=".pdf">
             </div>
 
             <div class="modal-footer">
@@ -167,8 +169,8 @@
 
             <div class="form-group mb-2">
               <label for="content">Content:</label>
-              <input type="file" accept=
-              ".pdf, .doc, .docs">  
+              <input type="file" (change)="changeFile($event)" name="content" accept=
+              ".pdf">  
             </div>
 
 
