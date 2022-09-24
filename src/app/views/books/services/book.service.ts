@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,7 @@ export class BookService {
   baseURL='http://localhost:3000/api/v1/';
   constructor(private http: HttpClient) { }
 
-  // downloadFile(): any {
-	// 	return this.http.post(`${this.baseURL}Books/download`, {responseType: 'blob', Headers: new HttpHeaders().append('Content-Type', 'application/json')});
-  // }
+
 
   createBook(book: any){
     return this.http.post(`${this.baseURL}Books`, book);

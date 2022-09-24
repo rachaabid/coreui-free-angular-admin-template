@@ -18,7 +18,6 @@
           <th scope="col">Author</th>
           <th scope="col">Description</th>
           <th scope="col">Photo</th>
-          <th scope="col">Content</th>
           <th class="col-2" id="actions">Actions</th>
         </tr>
       </thead>
@@ -28,20 +27,16 @@
           <td>{{book.title | titlecase}}</td>
           <td>{{book.author}}</td>
           <td>{{book.description}}</td>
-          <td>{{book.photo}}</td>
-          <td>
-            <a href="{{book.content}}" 
-            download="{{book.title}}"
-            >Download</a>
-          </td>
+          <td><img [src]="book.photo" width="50px"></td>
 
           <td>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
               (click)="showBookData(book._id)"><span><i class="fa fa-edit text-white"></i></span></button>
-              
+
             <button type="button" class="btn btn-danger" (click)="deleteBook(book._id)"><span><i
                   class="fa fa-trash-alt text-white"></i></span></button>
           </td>
+
         </tr>
       </tbody>
     </table>
@@ -89,12 +84,12 @@
               <ng-select class="bootstrap" placeholder="Choose category for your book" [options]="listCategories"
                 formControlName="categories" [multiple]="true">
               </ng-select>
-            </fieldset> 
+            </fieldset>
 
             <div class="form-group">
               <label for="photo">Photo:</label>
               <input type="file" (change)="selectImage($event)" accept="image/*">
-              <img [src]= "bookForm.value.photo" alt="book" style="height: 50px; width:50px"> 
+              <img [src]="bookForm.value.photo" alt="book" style="height: 50px; width:50px">
             </div>
 
             <div class="form-group mb-2">
@@ -158,19 +153,18 @@
               <ng-select class="bootstrap" placeholder="Choose category for your book" [options]="listCategories"
                 formControlName="categories" [multiple]="true">
               </ng-select>
-            </fieldset> 
+            </fieldset>
 
             <div class="form-group">
               <label for="photo">Photo:</label>
               <input type="file" (change)="selectImage($event)" accept="image/*">
-              <img [src]="bookForm.value.photo" alt="book" style="height: 50px; width:50px"> 
+              <img [src]="bookForm.value.photo" alt="book" style="height: 50px; width:50px">
             </div>
 
 
             <div class="form-group mb-2">
               <label for="content">Content:</label>
-              <input type="file" (change)="changeFile($event)" name="content" accept=
-              ".pdf">  
+              <input type="file" (change)="changeFile($event)" name="content" accept=".pdf">
             </div>
 
 

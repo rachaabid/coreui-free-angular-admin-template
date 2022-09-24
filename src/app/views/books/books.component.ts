@@ -31,7 +31,8 @@ export class BooksComponent implements OnInit {
       description: new FormControl('', Validators.required),
       categories: new FormControl(''),
       photo: new FormControl(''),
-      content: new FormControl('')
+      content: new FormControl(''),
+      contentLink: new FormControl('')
     })
   }
   loadBooks() {
@@ -39,7 +40,8 @@ export class BooksComponent implements OnInit {
   }
 
   loadCategories() {
-    this.bookService.getCategories().subscribe((data: any) => { this.listCategories = data })
+    this.bookService.getCategories().subscribe((data: any) => { this.listCategories = data }
+    )
   }
 
   selectImage(event: any) {
@@ -54,6 +56,7 @@ export class BooksComponent implements OnInit {
 
 changeFile(e: any){
   this.filePdf = e.target.files[0];
+  console.log(e.target.files[0])
 }
 
   addBook() {
