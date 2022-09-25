@@ -12,7 +12,7 @@
             {{book.description | slice:0:100}}
             <span *ngIf="book.description.length > 100">...</span>
           </p>
-            <a href={{book.contentLink}}
+            <a *ngIf="" href={{book.contentLink}}
             download="{{book.title}}"
             >Download</a>
         </div>

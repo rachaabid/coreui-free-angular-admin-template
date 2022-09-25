@@ -26,7 +26,8 @@
           <td>{{i+1}}</td>
           <td>{{book.title | titlecase}}</td>
           <td>{{book.author}}</td>
-          <td>{{book.description}}</td>
+          <td> {{book.description | slice:0:100}}
+            <span *ngIf="book.description.length > 100">...</span></td>
           <td><img [src]="book.photo" width="50px"></td>
 
           <td>
