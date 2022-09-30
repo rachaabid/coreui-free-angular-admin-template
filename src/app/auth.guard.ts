@@ -15,33 +15,23 @@ export class AuthGuard implements CanActivate {
 
       
       const token = localStorage.getItem('token') || '';
-      let decodedToken: any = jwt_decode(token);
       
 
       if (token !== null) {
-       let isExpired: any = this.isExpiredToken(token);
-        if (isExpired) {
-          return true
-        }  
-        else {
-
-          if(decodedToken.role = 'Admin'){
-            this.route.navigate(['/login'])
-            alert('your token expired')
-            return false
-          }
-          else{
-            this.route.navigate(['/loginCustomer'])
-            alert('your token expired')
-            return false
-          }
+        let isExpired: any = this.isExpiredToken(token);
+         if (isExpired) {
+           return true
+         }
+         else {
+           this.route.navigate(['/loginCustomer'])
+           alert('your token expired')
+           return false
+         }
         }
-        
-       }
-       else {
-         this.route.navigate(['/register'])
-         return false
-       }
+        else {
+          this.route.navigate(['/loginCustomer'])
+          return false
+        }
     
      }
      isExpiredToken(token: string): boolean{
@@ -53,16 +43,8 @@ export class AuthGuard implements CanActivate {
          return expireDate>curentDate
       }
       else{
-        if(decodedToken.role = 'Admin'){
-          this.route.navigate(['/login'])
-          alert('your token expired')
-          return false
-        }
-        else{
-          this.route.navigate(['/loginCustomer'])
-          alert('your token expired')
-          return false
-        }
+        this.route.navigate(['/loginCustomer'])
+        return false
       }
      }
 }

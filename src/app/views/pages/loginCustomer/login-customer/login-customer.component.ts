@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { LoginService } from '../../login/login.service';
+import { LoginCustomerService } from '../../loginCustomer/login-customer.service';
 
 @Component({
   selector: 'app-login-customer',
@@ -12,7 +12,7 @@ import { LoginService } from '../../login/login.service';
 export class LoginCustomerComponent implements OnInit {
 logCustomerForm?: FormGroup;
 submitted = false;
-  constructor(private toastr: ToastrService, private route: Router, private loginService: LoginService) { }
+  constructor(private toastr: ToastrService, private route: Router, private loginCustomerService: LoginCustomerService) { }
 
   ngOnInit(): void {
     this.logCustomerForm = new FormGroup ({
@@ -27,7 +27,7 @@ submitted = false;
     if (this.logCustomerForm?.invalid){
       return
     }
-    this.loginService.signIn(this.logCustomerForm?.value).subscribe((response: any)=>{ 
+    this.loginCustomerService.signInCustomer(this.logCustomerForm?.value).subscribe((response: any)=>{ 
       localStorage.setItem('token', response.token)
       this.toastr.success('Welcome to library', 'Hello')
       this.route.navigate(['/client/home']);

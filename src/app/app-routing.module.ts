@@ -103,14 +103,14 @@ const routes: Routes = [
     }
   },
   {
-    path: 'loginAdmin',
+    path: 'login',
     component: LoginComponent,
     data: {
       title: 'Login Page'
     }
   },
   {
-    path: 'login',
+    path: 'loginCustomer',
     component: LoginCustomerComponent,
     data: {
       title: 'LoginCustomer Page'

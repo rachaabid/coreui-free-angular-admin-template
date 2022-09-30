@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BookService } from 'src/app/views/books/services/book.service';
+import { BookClientService } from 'src/app/client/list-books/bookClient.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-book-details',
@@ -10,11 +11,17 @@ import { BookService } from 'src/app/views/books/services/book.service';
 export class BookDetailsComponent implements OnInit {
   book: any;
   idBook: any;
-  constructor(private bookService: BookService, private route: ActivatedRoute) { }
+  countDownload: any;
+  typeCustomer: any;
+  constructor(private bookClientService: BookClientService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.idBook = this.route.snapshot.params['id'];
-    this.bookService.getBookById(this.idBook).subscribe(response => this.book = response);
+    this.bookClientService.getBookById(this.idBook).subscribe(response => this.book = response);
+    
+    const token = localStorage.getItem('token') || '';
+    let decodedToken: any = jwt_decode(token);
+    this.countDownload = decodedToken.countDownload;
+    this.typeCustomer = decodedToken.type;
   }
-
 }

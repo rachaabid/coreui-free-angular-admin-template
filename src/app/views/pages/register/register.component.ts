@@ -22,8 +22,8 @@ export class RegisterComponent implements OnInit {
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
-      role: new FormControl('', Validators.required),
-      type: new FormControl('')
+      // role: new FormControl('', Validators.required),
+      // type: new FormControl('')
   })
 
 }
@@ -35,19 +35,19 @@ if (this.userForm?.invalid){
 }
 this.registerService.signup(this.userForm?.value).subscribe((response: any)=>{
 
-  if (this.userForm?.value['role'] === 'Admin'){
-    this.toastr.success('Admin created', 'Hello')
-    this.route.navigate(['/login']);
-  }
+//   if (this.userForm?.value['role'] === 'Admin'){
+     this.toastr.success('Admin created', 'Hello')
+     this.route.navigate(['/loginAdmin']);
+//   }
 
-if (this.userForm?.value['role'] === 'Customer'){
-    this.toastr.success('Customer created', 'Hello')
-    this.route.navigate(['/loginCustomer']);
-  }
+// if (this.userForm?.value['role'] === 'Customer'){
+//     this.toastr.success('Customer created', 'Hello')
+//     this.route.navigate(['/loginCustomer']);
+//   }
 
-}, (error: any)=>{
+ (error: any)=>{
   console.log(error);
-});
+}});
 }
 }
 

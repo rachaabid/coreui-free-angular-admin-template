@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BookService } from 'src/app/views/books/services/book.service';
+import { BookClientService } from 'src/app/client/list-books/bookClient.service';
 
 @Component({
   selector: 'app-list-books',
@@ -9,10 +9,10 @@ import { BookService } from 'src/app/views/books/services/book.service';
 })
 export class ListBooksComponent implements OnInit {
 listBooks: any;
-  constructor(private toastr: ToastrService, private bookService: BookService) { }
+  constructor(private toastr: ToastrService, private bookClientService: BookClientService) { }
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe((response: any)=>{
+    this.bookClientService.getBooks().subscribe((response: any)=>{
       this.listBooks = response
     },
     (error)=>{console.log(error)})

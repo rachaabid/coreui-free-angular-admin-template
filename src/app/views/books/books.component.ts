@@ -29,7 +29,7 @@ export class BooksComponent implements OnInit {
       title: new FormControl('', Validators.required),
       author: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
-      categories: new FormControl(''),
+      category: new FormControl(''),
       photo: new FormControl(''),
       content: new FormControl(''),
       contentLink: new FormControl('')
