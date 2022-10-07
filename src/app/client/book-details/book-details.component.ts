@@ -28,7 +28,7 @@ export class BookDetailsComponent implements OnInit {
     this.idCustomer = decodedToken.customerId;
   }
 
- download(){
+  download(){
  this.bookClientService.countDownload(this.idCustomer, this.idBook).subscribe(data=>console.log(data))
  }
 }
