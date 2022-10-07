@@ -24,6 +24,7 @@ export class CustomersComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
       type: new FormControl(''),
+      countDownload: new FormControl('')
     })
   }
 

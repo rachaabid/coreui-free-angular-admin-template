@@ -12,10 +12,10 @@
             {{book.description | slice:0:100}}
             <span *ngIf="book.description.length > 100">...</span>
           </p>
-           <button class="btn btn-primary" type="button" [disabled]="((countDownload >= 5) || (typeCustomer == 'Normal')) ? true : false">
+           <button class="btn btn-primary" type="button" (click)="download()" [disabled]="((countDownload >= 5) || (typeCustomer == 'Normal')) ? true : false">
             <a href= "{{book.contentLink}}" target="_blank"
             download="{{book.title}}"
-            >Download</a>
+           >Download</a>
            </button> 
         </div>
       </div>

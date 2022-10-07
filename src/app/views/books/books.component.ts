@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookService } from '../books/services/book.service';
 import { ToastrService } from 'ngx-toastr';
 import { IOption } from 'ng-select';
-import { saveAs } from 'file-saver';
+import { CustomerService } from '../customers/services/customer.service';
 
 @Component({
   selector: 'app-Books',
@@ -20,7 +20,7 @@ export class BooksComponent implements OnInit {
   searchBook: string = '';
   fileSelected: any;
   filePdf: any;
-  constructor(private bookService: BookService, private toastr: ToastrService) { }
+  constructor(private bookService: BookService, customerService: CustomerService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadBooks();
@@ -57,6 +57,10 @@ export class BooksComponent implements OnInit {
 changeFile(e: any){
   this.filePdf = e.target.files[0];
   console.log(e.target.files[0])
+}
+
+numberDownload(n: any){
+
 }
 
   addBook() {
@@ -123,10 +127,4 @@ changeCategory(e: any){
   this.bookForm?.get('categories')?.setValue(e.target.value, {onlySelf: true})
   }
 
-  // download() {
-	// 	this.bookService.downloadFile().subscribe(
-  //     (data: any)=> console.log(data),
-  //     (error: any)=> console.log(error)
-  //   );
-	// }
 }
