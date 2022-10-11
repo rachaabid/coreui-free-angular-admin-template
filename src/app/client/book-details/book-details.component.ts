@@ -12,7 +12,7 @@ import { CustomerService } from 'src/app/views/customers/services/customer.servi
 export class BookDetailsComponent implements OnInit {
   book: any;
   idBook: any;
-  idCustomer: any;
+  customerId: any;
   countDownload: any;
   typeCustomer: any;
   constructor(private bookClientService: BookClientService, private customerService: CustomerService,private route: ActivatedRoute) { }
@@ -25,10 +25,10 @@ export class BookDetailsComponent implements OnInit {
     let decodedToken: any = jwt_decode(token);
     this.countDownload = decodedToken.countDownload;
     this.typeCustomer = decodedToken.type;
-    this.idCustomer = decodedToken.customerId;
+    this.customerId = decodedToken.customerId;
   }
 
   download(){
- this.bookClientService.countDownload(this.idCustomer, this.idBook).subscribe(data=>console.log(data))
+ this.bookClientService.countDownload(this.customerId, this.idBook).subscribe(data=>console.log(data))
  }
 }

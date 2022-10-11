@@ -23,8 +23,7 @@ export class CustomersComponent implements OnInit {
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
-      type: new FormControl(''),
-      countDownload: new FormControl('')
+      type: new FormControl('')
     })
   }
 

@@ -16,7 +16,7 @@ export class BookClientService {
     return this.http.get(`${this.baseURL}BookCustomer/${idBook}`);
    }
 
-   countDownload(idCustomer: any, data: any){
-    return this.http.put(`${this.baseURL}download/${idCustomer}`, data);
+   countDownload(customerId: any, data: any){
+    return this.http.put(`${this.baseURL}download/${customerId}`, data);
    }
 }
